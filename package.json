@@ -3,11 +3,32 @@
   "version": "1.0.0",
   "description": "Matrix digital rain for the pi coding agent — boot sequence, typed messages, and falling katakana.",
   "keywords": ["pi-package", "pi", "matrix", "terminal", "tui", "digital-rain"],
+  "type": "module",
+  "license": "MIT",
+  "author": "Matt Robb",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewrobb/pi-matrix.git"
+  },
+  "homepage": "https://github.com/matthewrobb/pi-matrix#readme",
+  "bugs": {
+    "url": "https://github.com/matthewrobb/pi-matrix/issues"
+  },
+  "scripts": {
+    "test": "node scripts/smoke.mjs"
+  },
+  "files": ["index.ts", "README.md", "CHANGELOG.md", "LICENSE"],
   "pi": {
     "extensions": ["./index.ts"]
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
     "@earendil-works/pi-tui": "*"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

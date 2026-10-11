@@ -22,11 +22,19 @@ truecolor phosphor green.
 
 ## Install
 
+From git:
+
 ```bash
-pi install git:github.com/<you>/pi-matrix
+pi install git:github.com/matthewrobb/pi-matrix
 ```
 
-Or from a local checkout:
+From npm, once published:
+
+```bash
+pi install npm:pi-matrix
+```
+
+From a local checkout:
 
 ```bash
 pi install ./pi-matrix
@@ -65,8 +73,8 @@ All near the top of `index.ts`:
 | `BOOT` | — | boot lines, printed one per row |
 | `MESSAGES` | — | the typed messages |
 
-To jump straight to the rain, set the initial `phase` to `"rain"` in the
-`MatrixRain` constructor, or just press any key.
+To skip the intro entirely, start the phase at `"rain"` in the `MatrixRain`
+constructor — or just press any key.
 
 ## How it works
 
@@ -85,6 +93,41 @@ To jump straight to the rain, set the initial `phase` to `"rain"` in the
   components in the editor container; room is left for the header, footer and
   a sliver of transcript.
 
+## Development
+
+```bash
+npm test
+```
+
+The smoke test loads the real extension, drives the phase machine by hand, and
+renders **every frame** of the intro and the rain across terminal widths 1–240
+and heights 6–200, asserting that no line is ever wider than the width it was
+given. That is the failure mode that matters: a line one column too wide wraps
+in the terminal and shreds the layout, and it never shows up at a normal size.
+
+`@earendil-works/pi-tui` is a peer dependency, not a dependency — pi provides it
+at runtime, and declaring it would ship a second copy and risk duplicate module
+instances. The test resolves it from your pi installation, so it needs no
+`node_modules`; set `PI_TUI_PATH` to override the lookup.
+
+## Publishing
+
+```bash
+npm version patch     # or minor / major
+git push --follow-tags
+```
+
+The tag triggers `.github/workflows/publish.yml`, which checks that the tag
+matches `package.json`, runs the tests, and publishes with provenance. It needs
+an `NPM_TOKEN` repository secret.
+
+Manual publish works too:
+
+```bash
+npm login
+npm publish
+```
+
 ## Requirements
 
 - pi in interactive (TUI) mode. `/matrix` reports an error in non-interactive
@@ -94,4 +137,4 @@ To jump straight to the rain, set the initial `phase` to `"rain"` in the
 
 ## License
 
-Not yet chosen.
+MIT

@@ -99,10 +99,15 @@ class MatrixRain {
   private cachedW = -1;
   private cachedV = -1;
 
+  private tui: { requestRender: () => void; terminal?: { rows: number } };
+  private done: () => void;
+
   constructor(
-    private tui: { requestRender: () => void; terminal?: { rows: number } },
-    private done: () => void,
+    tui: { requestRender: () => void; terminal?: { rows: number } },
+    done: () => void,
   ) {
+    this.tui = tui;
+    this.done = done;
     this.timer = setInterval(() => {
       if (!this.paused) {
         this.tick();
