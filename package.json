@@ -1,0 +1,13 @@
+{
+  "name": "pi-matrix",
+  "version": "1.0.0",
+  "description": "Matrix digital rain for the pi coding agent — boot sequence, typed messages, and falling katakana.",
+  "keywords": ["pi-package", "pi", "matrix", "terminal", "tui", "digital-rain"],
+  "pi": {
+    "extensions": ["./index.ts"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}
